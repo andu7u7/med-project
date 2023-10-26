@@ -24,15 +24,15 @@
                 android:padding="10sp"
                 />
 
-            <Button
-                android:id="@+id/btnIrRegistrar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="30sp"
-                android:layout_marginTop="20sp"
-                android:layout_marginBottom="20sp"
-                android:onClick="IrARegistrarReceta"
-                android:text="+"
-                android:textSize="20sp" />
+    <Button
+        android:id="@+id/btnIrRegistrar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
+        android:onClick="IrARegistrarReceta"
+        android:text="+"
+        android:textSize="20sp" />
 
 </LinearLayout>

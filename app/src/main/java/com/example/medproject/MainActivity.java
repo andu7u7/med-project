@@ -5,12 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -19,13 +18,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-
-    Button btnRegresar, btnRegistrar;
     EditText txtNombreMedicamento, txtIntervalo, txtDosis;
     TextView txtFechaInicio, txtHoraInicio, txtFechaFin;
     RadioGroup rgIntervalo;
@@ -49,26 +44,16 @@ public class MainActivity extends AppCompatActivity {
         txtFechaFin = findViewById(R.id.txtFechaFin);
         cbCronico = findViewById(R.id.cbCronico);
 
-        txtFechaInicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirCalendario(txtFechaInicio);
-            }
-        });
+        txtFechaInicio.setOnClickListener(v -> abrirCalendario(txtFechaInicio));
 
-        txtFechaFin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirCalendario(txtFechaFin);
-            }
-        });
+        txtFechaFin.setOnClickListener(v -> abrirCalendario(txtFechaFin));
 
-        cbCronico.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                txtFechaFin.setEnabled(!isChecked);
-            }
-        });
+        cbCronico.setOnCheckedChangeListener((buttonView, isChecked) -> txtFechaFin.setEnabled(!isChecked));
+    }
+
+    public void IrListaRecetas(View view) {
+        Intent listarRecetas = new Intent(this, ListaMedicamento.class);
+        startActivity(listarRecetas);
     }
 
     public void registrar(View view) {
@@ -100,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             bd.close();
 
             Toast.makeText(getApplicationContext(), "Registro correcto!", Toast.LENGTH_LONG).show();
-            // Limpiar();
+            Limpiar();
         } catch (Exception e) {
             String error = e.getMessage();
             Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
@@ -109,11 +94,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void Limpiar() {
         txtNombreMedicamento.setText("");
-        txtHoraInicio.setText("");
-        txtFechaInicio.setText("");
+        txtHoraInicio.setText("hh:mm");
+        txtFechaInicio.setText("yyyy/mm/dd");
         txtIntervalo.setText("");
         txtDosis.setText("");
-        txtFechaFin.setText("");
+        txtFechaFin.setText("yyyy/mm/dd");
+        rgIntervalo.clearCheck();
+        cbCronico.setChecked(false);
     }
 
     public void abrirCalendario(TextView txt) {
@@ -122,12 +109,9 @@ public class MainActivity extends AppCompatActivity {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dpd = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String fecha =  year + "/" + (month + 1) + "/" + dayOfMonth;
-                txt.setText(fecha);
-            }
+        DatePickerDialog dpd = new DatePickerDialog(MainActivity.this, (view, year1, month1, dayOfMonth) -> {
+            String fecha =  year1 + "/" + (month1 + 1) + "/" + dayOfMonth;
+            txt.setText(fecha);
         }, year, month, day);
         dpd.show();
     }
@@ -137,12 +121,9 @@ public class MainActivity extends AppCompatActivity {
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
 
-        TimePickerDialog tpd = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String hora = hourOfDay + ":" + minute;
-                txtHoraInicio.setText(hora);
-            }
+        TimePickerDialog tpd = new TimePickerDialog(MainActivity.this, (view1, hourOfDay, minute1) -> {
+            String hora = hourOfDay + ":" + minute1;
+            txtHoraInicio.setText(hora);
         }, hour, minute, true);
         tpd.show();
     }

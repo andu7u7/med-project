@@ -14,11 +14,12 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE medicamentos (id INTEGER PRIMARY KEY, nombre TEXT NOT NULL, dosis INTEGER NOT NULL CHECK (dosis > 0),intervalo INTEGER NOT NULL, fecha_inicio TEXT NOT NULL, hora_inicio TEXT NOT NULL, fecha_fin TEXT)");
+        db.execSQL("CREATE TABLE medicamentos (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT NOT NULL, dosis INTEGER NOT NULL CHECK (dosis > 0),intervalo INTEGER NOT NULL, fecha_inicio TEXT NOT NULL, hora_inicio TEXT NOT NULL, fecha_fin TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE medicamentos");
+        onCreate(db);
     }
 }

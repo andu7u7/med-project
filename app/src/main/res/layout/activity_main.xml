@@ -7,10 +7,10 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnRegresar"
         android:layout_width="40dp"
         android:layout_height="37dp"
-        android:text="<-"
+        android:text="regresar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.019" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/txtNombreMedicamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.117" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnFechaInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fecha"
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.521" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnHoraInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hora"
@@ -71,7 +71,7 @@
         app:layout_constraintVertical_bias="0.605" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/txtHoraInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -85,7 +85,7 @@
         app:layout_constraintVertical_bias="0.605" />
 
     <EditText
-        android:id="@+id/editTextText6"
+        android:id="@+id/txtFechaInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -111,7 +111,7 @@
         app:layout_constraintVertical_bias="0.469" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/txtIntervalo"
         android:layout_width="105dp"
         android:layout_height="67dp"
         android:ems="10"
@@ -124,6 +124,7 @@
         app:layout_constraintVertical_bias="0.369" />
 
     <RadioGroup
+        android:id="@+id/rgIntervalo"
         android:layout_width="164dp"
         android:layout_height="115dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -134,13 +135,13 @@
         app:layout_constraintVertical_bias="0.351">
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/rbIntervaloHoras"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Horas" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/rbIntervaloDias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Días" />
@@ -159,11 +160,11 @@
         app:layout_constraintVertical_bias="0.324" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/cantDosis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="number"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +186,7 @@
         app:layout_constraintVertical_bias="0.083" />
 
     <EditText
-        android:id="@+id/editTextText7"
+        android:id="@+id/txtFechaFin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -199,7 +200,7 @@
         app:layout_constraintVertical_bias="0.831" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnFechaFin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fecha"
@@ -223,7 +224,7 @@
         app:layout_constraintVertical_bias="0.759" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cbCronico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tratamiento crónico"
@@ -247,9 +248,10 @@
         app:layout_constraintVertical_bias="0.197" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="registrar"
         android:text="Registrar receta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

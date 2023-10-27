@@ -14,7 +14,7 @@
         android:gravity="center"
         android:layout_gravity="center_vertical">
 
-        <!-- Título "¿Qué es Medimind?" -->
+
         <TextView
             android:id="@+id/tvTituloAcercaDe"
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:gravity="center"
             android:layout_marginBottom="32dp" />
 
-        <!-- Descripción Acerca de Medimind -->
+
         <TextView
             android:id="@+id/tvDescripcionAcercaDe"
             android:layout_width="match_parent"

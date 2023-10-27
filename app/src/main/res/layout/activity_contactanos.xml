@@ -9,7 +9,7 @@
     android:gravity="center_vertical"
     tools:context=".ContactanosActivity">
 
-    <!-- Título "Contáctanos" -->
+
     <TextView
         android:id="@+id/tvContactanosTitulo"
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         android:gravity="center"
         android:layout_marginBottom="32dp" />
 
-    <!-- Texto de introducción -->
+
     <TextView
         android:id="@+id/tvIntroContacto"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         android:gravity="center"
         android:layout_marginBottom="32dp" />
 
-    <!-- Botón Teléfono -->
+
     <Button
         android:id="@+id/btnTelefono"
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:text="Teléfono"
         android:layout_marginBottom="16dp" />
 
-    <!-- Botón Email -->
+
     <Button
         android:id="@+id/btnEmail"
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
         android:text="Email"
         android:layout_marginBottom="16dp" />
 
-    <!-- Botón WhatsApp con color verde -->
+
     <Button
         android:id="@+id/btnWhatsApp"
         android:layout_width="match_parent"

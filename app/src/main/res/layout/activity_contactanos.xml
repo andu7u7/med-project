@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    tools:context=".ContactanosActivity">
+
+    <!-- Título "Contáctanos" -->
+    <TextView
+        android:id="@+id/tvContactanosTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contáctanos"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Texto de introducción -->
+    <TextView
+        android:id="@+id/tvIntroContacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tu opinion y experiencia con Medimind son de suma importancia para notros. Si tienes preguntas, suegerencias o algun comentario, ¡nos encantaría escucharte!. Aquí te dejamos varias maneras de ponerse eb contacto con nuestro equipo."
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Botón Teléfono -->
+    <Button
+        android:id="@+id/btnTelefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teléfono"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón Email -->
+    <Button
+        android:id="@+id/btnEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón WhatsApp con color verde -->
+    <Button
+        android:id="@+id/btnWhatsApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WhatsApp"
+        android:backgroundTint="#25D366"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

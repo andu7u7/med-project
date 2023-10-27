@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".AcercaDeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center_vertical">
+
+        <!-- Título "¿Qué es Medimind?" -->
+        <TextView
+            android:id="@+id/tvTituloAcercaDe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¿Qué es Medimind?"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Descripción Acerca de Medimind -->
+        <TextView
+            android:id="@+id/tvDescripcionAcercaDe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medimind es una aplicación diseñada para facilitar tu adherencia a la medicación. Sabemos lo crucial que es mantenerse al día con tus medicamentos, y cómo puede ser un desafío recordar todas las dosis, horarios y detalles. Por eso, hemos creado una herramienta que te brinda todo lo que necesitas, justo en la palma de tu mano.\n\nEn Medimind, creemos en el poder de la tecnología para transformar y mejorar la salud. Estamos aquí para apoyarte en tu viaje hacia un mejor control de tu medicación, y juntos, haremos una diferencia en tu bienestar. ¡Gracias por confiar en nosotros!"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginBottom="32dp" />
+
+    </LinearLayout>
+</ScrollView>

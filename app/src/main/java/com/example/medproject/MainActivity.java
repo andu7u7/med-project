@@ -1,6 +1,7 @@
 package com.example.medproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.Data;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -18,7 +19,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.medproject.worker.WManagerNotif;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     EditText txtNombreMedicamento, txtIntervalo, txtDosis;
@@ -27,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     RadioButton rbIntervaloDias, rbIntervaloHoras;
     CheckBox cbCronico;
 
+    Calendar f_actual = Calendar.getInstance(); //fecha actual
+    Calendar calendar = Calendar.getInstance();
+
+    private int hour, minute, day, month, year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +93,15 @@ public class MainActivity extends AppCompatActivity {
             bd.insert("medicamentos", null, registro);
             bd.close();
 
-            Toast.makeText(getApplicationContext(), "Registro correcto!", Toast.LENGTH_LONG).show();
+            String tag = generarId();
+            Long HoraAlerta = calendar.getTimeInMillis() - System.currentTimeMillis();
+            int random = (int) (Math.random() * 50 +1);
+
+            Data data = guardarDatos("Hora de tu medicamento!", "Te toca ingerir '"+nombreMedicamento+"'", random);
+            WManagerNotif.GuardarNotificacion(HoraAlerta, data, tag);
+
+
+            Toast.makeText(getApplicationContext(), "Medicamento registrado!", Toast.LENGTH_LONG).show();
             Limpiar();
         } catch (Exception e) {
             String error = e.getMessage();
@@ -104,27 +121,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void abrirCalendario(TextView txt) {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
+        year = f_actual.get(Calendar.YEAR);
+        month = f_actual.get(Calendar.MONTH);
+        day = f_actual.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dpd = new DatePickerDialog(MainActivity.this, (view, year1, month1, dayOfMonth) -> {
-            String fecha =  year1 + "/" + (month1 + 1) + "/" + dayOfMonth;
-            txt.setText(fecha);
+        DatePickerDialog dpd = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int y, int m, int d) {
+                calendar.set(Calendar.DAY_OF_MONTH, d);
+                calendar.set(Calendar.MONTH, m);
+                calendar.set(Calendar.YEAR, y);
+
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+                String strFecha = formato.format(calendar.getTime());
+                txt.setText(strFecha);
+            }
         }, year, month, day);
         dpd.show();
     }
 
     public void abrirHora(View view){
-        Calendar cal = Calendar.getInstance();
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int minute = cal.get(Calendar.MINUTE);
+        hour = f_actual.get(Calendar.HOUR_OF_DAY);
+        minute = f_actual.get(Calendar.MINUTE);
 
-        TimePickerDialog tpd = new TimePickerDialog(MainActivity.this, (view1, hourOfDay, minute1) -> {
-            String hora = hourOfDay + ":" + minute1;
-            txtHoraInicio.setText(hora);
+        TimePickerDialog tpd = new TimePickerDialog(view.getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int h, int m) {
+                calendar.set(Calendar.HOUR_OF_DAY, h);
+                calendar.set(Calendar.MINUTE, m);
+
+                txtHoraInicio.setText(String.format("%02d:%02d", h, m));
+            }
         }, hour, minute, true);
         tpd.show();
     }
+
+    private String generarId(){
+        return UUID.randomUUID().toString();
+    }
+
+    private Data guardarDatos(String titulo, String detalle, int id_noti){
+        return new Data.Builder()
+                .putString("titulo", titulo)
+                .putString("detalle", detalle)
+                .putInt("id_noti", id_noti).build();
+    }
+
 }

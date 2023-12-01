@@ -46,7 +46,7 @@ public class WManagerNotif extends Worker {
 
     private void mostrarNotificacion(String titulo, String detalle) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("id", "Mi Canal", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel("mi_canal_id", "Mi Canal", NotificationManager.IMPORTANCE_HIGH);
             NotificationManager manager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
         }

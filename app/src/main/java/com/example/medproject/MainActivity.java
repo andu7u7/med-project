@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -19,11 +20,18 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.medproject.entidad.Medicamento;
+import com.example.medproject.services.RestClient;
 import com.example.medproject.worker.WManagerNotif;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     EditText txtNombreMedicamento, txtIntervalo, txtDosis;
@@ -61,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void IrListaRecetas(View view) {
-        Intent listarRecetas = new Intent(this, ListaMedicamento.class);
+        Intent listarRecetas = new Intent(this, ListaRecordatorio.class);
         startActivity(listarRecetas);
     }
 
@@ -90,8 +98,31 @@ public class MainActivity extends AppCompatActivity {
             registro.put("fecha_inicio", fechaInicio);
             registro.put("fecha_fin", fechaFin);
             registro.put("intervalo", intervalo);
-            bd.insert("medicamentos", null, registro);
-            bd.close();
+
+            // LLAMAR A LA API
+            RestClient restClient = RestClient.getInstance();
+            restClient.getMedicine(nombreMedicamento, new Callback<Medicamento>() {
+                @Override
+                public void onResponse(Call<Medicamento> call, Response<Medicamento> response) {
+                    if(response.isSuccessful()) {
+                        Medicamento medicamento = response.body();
+                        registro.put("imagen", medicamento.getImage());
+                        registro.put("descripcion", medicamento.getDescription());
+
+                    }
+                    else {
+                        registro.put("imagen", "");
+                        registro.put("descripcion", "");
+                        Log.e("MainActivity", "Error respuesta API");
+                    }
+                    bd.insert("medicamentos", null, registro);
+                    bd.close();
+                }
+                @Override
+                public void onFailure(Call<Medicamento> call, Throwable t) {
+                    Log.e("MainActivity", "Error mostrando medicinas. ", t);
+                }
+            });
 
             String tag = generarId();
             Long HoraAlerta = calendar.getTimeInMillis() - System.currentTimeMillis();
